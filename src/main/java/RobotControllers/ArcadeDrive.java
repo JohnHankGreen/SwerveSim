@@ -10,8 +10,8 @@ import java.util.List;
 public class ArcadeDrive implements RobotController {
     @Override // this tells Java that the `loop` method implements the `loop` method specified in `RobotController`
     public void loop(JoysticksInterface joysticks, RobotInterface robot) {
-        double leftVelocity = joysticks.getLeftStick().y * 5.0; // get the velocity of the robot going forward/backward
-        double rightVelocity = joysticks.getRightStick().x * 5.0; // get the velocity of the wheels that turn the robot
+        double forwardAndBackwardPower = joysticks.getLeftStick().y * 5.0; // get the velocity of the robot going forward/backward
+        double spinnyPower = joysticks.getRightStick().x * 5.0; // get the velocity of the wheels that turn the robot
 
         // this is a list of the swerve modules that are on the robot
         List<SwerveWheelInterface> drivetrain = robot.getDrivetrain();
@@ -24,15 +24,15 @@ public class ArcadeDrive implements RobotController {
 
             // use the x position of the wheel (with the center of the robot being (0, 0)) to see if the wheel is on the right half of the robot or the left half
             if(wheel.getPosition().x > 0) { // positive x is to the right, negative x is to the left
-                wheel.setWheelVelocity(leftVelocity); // Drive forward
+                wheel.setWheelVelocity(forwardAndBackwardPower); // Drive forward
             } else {
-                wheel.setWheelVelocity(leftVelocity); // Drive backward
+                wheel.setWheelVelocity(forwardAndBackwardPower); // Drive backward
             }
 
             if(joysticks.getRightStick().x > 0 && wheel.getPosition().x < 0) {
-                wheel.setWheelVelocity(rightVelocity); // Turns right supposedly
+                wheel.setWheelVelocity(spinnyPower + forwardAndBackwardPower); // Turns right supposedly
             } else if(joysticks.getRightStick().x < 0 && wheel.getPosition().x > 0){
-                wheel.setWheelVelocity(-(rightVelocity)); // Turns left supposedly
+                wheel.setWheelVelocity(-(spinnyPower + forwardAndBackwardPower)); // Turns left supposedly
             }
         }
     }
