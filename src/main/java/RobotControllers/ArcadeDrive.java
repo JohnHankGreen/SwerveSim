@@ -32,7 +32,7 @@ public class ArcadeDrive implements RobotController {
             if(joysticks.getRightStick().x > 0 && wheel.getPosition().x < 0) {
                 wheel.setWheelVelocity(spinnyPower + forwardAndBackwardPower); // Turns right supposedly
             } else if(joysticks.getRightStick().x < 0 && wheel.getPosition().x > 0){
-                wheel.setWheelVelocity(-(spinnyPower + forwardAndBackwardPower)); // Turns left supposedly
+                wheel.setWheelVelocity(-(spinnyPower - forwardAndBackwardPower)); // Turns left supposedly
             }
         }
     }
