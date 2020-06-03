@@ -32,19 +32,10 @@ public class BetterArcadeDrive implements RobotController {
                 wheel.setWheelVelocity(forwardAndBackwardPower); // Drive backward
             }
 
-            if(joysticks.getRightStick().x > 0) {
-                if(wheel.getPosition().x < 0){
-                    wheel.setWheelVelocity(spinnyPower * spinnier + forwardAndBackwardPower);// Turns right supposedly
-                } else if (wheel.getPosition().x > 0) {
-                    wheel.setWheelVelocity(-(spinnyPower * spinnier - forwardAndBackwardPower));
-                }
-            } else if(joysticks.getRightStick().x < 0){
-                if(wheel.getPosition().x > 0) {
-                    wheel.setWheelVelocity(-(spinnyPower * spinnier - forwardAndBackwardPower)); // Turns left supposedly
-                } else if (wheel.getPosition().x < 0) {
-                    wheel.setWheelVelocity(spinnyPower * spinnier + forwardAndBackwardPower);
-                }
-
+            if(wheel.getPosition().x > 0 && spinnyPower != 0) {
+                wheel.setWheelVelocity(-(spinnyPower * spinnier - forwardAndBackwardPower));
+            } else if(wheel.getPosition().x < 0 && spinnyPower != 0) {
+                wheel.setWheelVelocity(spinnyPower * spinnier + forwardAndBackwardPower);
             }
         }
     }
