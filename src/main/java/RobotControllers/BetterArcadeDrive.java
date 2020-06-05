@@ -25,16 +25,12 @@ public class BetterArcadeDrive implements RobotController {
             double spinnierY = wheel.getPosition().y;
             double spinnier = Math.sqrt((spinnierX * spinnierX) + (spinnierY * spinnierY)); //maths and such
             wheel.setWheelAngle(0); // make sure the wheels are always facing forward (none of this funny swerve business)
-            // use the x position of the wheel (with the center of the robot being (0, 0)) to see if the wheel is on the right half of the robot or the left half
-            if(wheel.getPosition().x > 0) { // positive x is to the right, negative x is to the left
-                wheel.setWheelVelocity(forwardAndBackwardPower); // Drive forward
-            } else {
-                wheel.setWheelVelocity(forwardAndBackwardPower); // Drive backward
-            }
 
-            if(wheel.getPosition().x > 0 && spinnyPower != 0) {
+            // use the x position of the wheel (with the center of the robot being (0, 0)) to see if the wheel is on the right half of the robot or the left half
+
+            if(wheel.getPosition().x > 0) {
                 wheel.setWheelVelocity(-(spinnyPower * spinnier - forwardAndBackwardPower));
-            } else if(wheel.getPosition().x < 0 && spinnyPower != 0) {
+            } else if(wheel.getPosition().x < 0) {
                 wheel.setWheelVelocity(spinnyPower * spinnier + forwardAndBackwardPower);
             }
         }
