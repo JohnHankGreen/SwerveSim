@@ -1,6 +1,7 @@
 import RobotControllers.BetterArcadeDrive;
 import RobotControllers.TankDrive;
 import RobotControllers.ArcadeDrive;
+import RobotControllers.TranslationalSwerve;
 import interfaces.RobotController;
 
 import java.util.ArrayList;
@@ -48,5 +49,6 @@ public class ControllersAndRobots {
         controllers.put("Tank Drive", new TankDrive());
         controllers.put("Arcade Drive", new ArcadeDrive());
         controllers.put("Better Arcade Drive", new BetterArcadeDrive());
+        controllers.put("Translational Swerve", new TranslationalSwerve());
     }
 }
