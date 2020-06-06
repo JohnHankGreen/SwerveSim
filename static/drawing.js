@@ -29,8 +29,8 @@ function drawRobot(graphics, robotState) {
     drawVelocities(graphics, robotState);
 }
 function drawVelocities(graphics, robotState) {
-    graphics.lineStyle(2, 0xffff00);
-    graphics.fillStyle(0xffff00);
+    graphics.lineStyle(2, 0x00ff00);
+    graphics.fillStyle(0x00ff00);
     if (mag(robotState.linearVelocity) > 0.01) {
         drawVector(graphics, pointToPixels(robotState.position), velocityToPixels(robotState.linearVelocity));
     }
@@ -46,7 +46,7 @@ function drawVelocities(graphics, robotState) {
     }
 }
 function drawAppliedVelocities(graphics, robotState) {
-    graphics.lineStyle(2, 0xff00ff);
+    graphics.lineStyle(2, 0xff0000);
     graphics.fillStyle(0xff00ff);
     for (var i = 0; i < robotState.drivetrain.length; i++) {
         if (mag(robotState.drivetrain[i].appliedVel) > 0.01) {
@@ -73,7 +73,7 @@ function drawSwerveModules(graphics, robotState) {
         polyToPixels(lmb);
         graphics.lineStyle(2, 0x000000);
         if (mag(mod.wheelSlip) < 0.1) {
-            graphics.fillStyle(0x00ff00, 1.0);
+            graphics.fillStyle(0x0000ff, 1.0);
         }
         else {
             graphics.fillStyle(0xff0000, 1.0);
@@ -94,9 +94,9 @@ function drawBody(graphics, robotState) {
     rotatePoly(lrb, robotState.heading);
     translatePoly(lrb, robotState.position);
     polyToPixels(lrb);
-    // the body will be green if it's driven well, red if the wheels are dragging
+    // the body will be blue if it's driven well, red if the wheels are dragging
     if (robotState.drivenWell)
-        graphics.fillStyle(0x00ff00, 0.33);
+        graphics.fillStyle(0x1b3ffe, 0.33);
     else
         graphics.fillStyle(0xff0000, 0.33);
     graphics.fillPoints(lrb.points, true);
