@@ -24,12 +24,12 @@ public class TranslationalSwerve implements RobotController {
         for(int i = 0; i < drivetrain.size(); i++) { // loop through each swerve module
             SwerveWheelInterface wheel = drivetrain.get(i); // the swerve module we are looking at
             double angle;
-            if(yTriangleLeg > 0) {
-                angle = Math.acos(xTriangleLeg / velocity); // what angle the wheel needs set to. doodle it.
-            } else if(yTriangleLeg < 0) {
-                angle = -(Math.acos(xTriangleLeg / velocity));
-            } else if (yTriangleLeg < 0 && xTriangleLeg == 0) {
+            if(yTriangleLeg < 0 && xTriangleLeg == 0) {
                 angle = 180;
+            } else if (xTriangleLeg < 0) {
+                angle = Math.acos(yTriangleLeg / velocity);
+            } else if(xTriangleLeg > 0) {
+                angle = -(Math.acos(yTriangleLeg / velocity)); // what angle the wheel needs set to. doodle it.
             } else {
                 angle = 0;
             }
