@@ -30,10 +30,13 @@ public class SpinningInPlace implements RobotController {
             wheel.setWheelAngle(-wheelAngle);
 
             // use the x position of the wheel (with the center of the robot being (0, 0)) to see if the wheel is on the right half of the robot or the left half
-            if(wheel.getPosition().y * wheel.getPosition().x < 0) {
+            if(wheel.getPosition().y * wheel.getPosition().x < 0 && wheel.getPosition().y != 0) {
                 wheel.setWheelVelocity(-(spinnyPower * spinnier));
-            } else if(wheel.getPosition().y * wheel.getPosition().x > 0) {
+            } else if(wheel.getPosition().y * wheel.getPosition().x > 0 && wheel.getPosition().y != 0) {
                 wheel.setWheelVelocity(spinnyPower * spinnier);
+            } else if (wheel.getPosition().y == 0) {
+                wheel.setWheelAngle(0);
+                wheel.setWheelVelocity(spinnyPower * spinnier * (-wheel.getPosition().x / Math.abs(wheel.getPosition().x))); //I was too lazy to make another if statement just to change a sign, so you get this.
             }
         }
     }
