@@ -8,6 +8,7 @@ import java.lang.Math;
 
 import java.util.List;
 
+
 public class TranslationalSwerve implements RobotController {
     @Override // this tells Java that the `loop` method implements the `loop` method specified in `RobotController`
     public void loop(JoysticksInterface joysticks, RobotInterface robot) {
@@ -25,8 +26,7 @@ public class TranslationalSwerve implements RobotController {
             SwerveWheelInterface wheel = drivetrain.get(i); // the swerve module we are looking at
             double angle;
             if(yTriangleLeg < 0 && xTriangleLeg == 0) {
-                angle = 0;
-                velocity = -(Math.sqrt((xTriangleLeg * xTriangleLeg) + (yTriangleLeg * yTriangleLeg)));
+                angle = Math.PI;
             } else if (xTriangleLeg < 0) {
                 angle = Math.acos(yTriangleLeg / velocity);
             } else if(xTriangleLeg > 0) {
