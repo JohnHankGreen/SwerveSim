@@ -4,6 +4,7 @@ import interfaces.JoysticksInterface;
 import interfaces.RobotController;
 import interfaces.RobotInterface;
 import interfaces.SwerveWheelInterface;
+import java.lang.Math;
 
 import java.util.List;
 
@@ -24,14 +25,14 @@ public class SpinningInPlace implements RobotController {
             double yTriangleLeg = wheel.getPosition().y;
             double spinnier = Math.sqrt((xTriangleLeg * xTriangleLeg) + (yTriangleLeg * yTriangleLeg)); //maths and such
 
-            double wheelAngleVector = Math.sqrt((yTriangleLeg * yTriangleLeg) + (xTriangleLeg * xTriangleLeg));
+            double wheelAngle = Math.atan2(xTriangleLeg, -yTriangleLeg);
 
-            wheel.setWheelAngle(wheelAngleVector * (wheel.getPosition().y/Math.abs(wheel.getPosition().y)) * (wheel.getPosition().x/Math.abs(wheel.getPosition().x)));
+            wheel.setWheelAngle(-wheelAngle);
 
             // use the x position of the wheel (with the center of the robot being (0, 0)) to see if the wheel is on the right half of the robot or the left half
-            if(wheel.getPosition().x > 0) {
+            if(wheel.getPosition().y * wheel.getPosition().x < 0) {
                 wheel.setWheelVelocity(-(spinnyPower * spinnier));
-            } else if(wheel.getPosition().x < 0) {
+            } else if(wheel.getPosition().y * wheel.getPosition().x > 0) {
                 wheel.setWheelVelocity(spinnyPower * spinnier);
             }
         }
