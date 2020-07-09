@@ -21,11 +21,11 @@ public class SpinningInPlace implements RobotController {
 
         for(int i = 0; i < drivetrain.size(); i++) { // loop through each swerve module
             SwerveWheelInterface wheel = drivetrain.get(i); // the swerve module we are looking at
-            double xTriangleLeg = wheel.getPosition().x;
-            double yTriangleLeg = wheel.getPosition().y;
-            double spinnier = Math.sqrt((xTriangleLeg * xTriangleLeg) + (yTriangleLeg * yTriangleLeg)); //maths and such
+            double xSpinningLeg = wheel.getPosition().x;
+            double ySpinningLeg = wheel.getPosition().y;
+            double spinnier = Math.sqrt((xSpinningLeg * xSpinningLeg) + (ySpinningLeg * ySpinningLeg)); //maths and such
 
-            double wheelAngle = Math.atan2(xTriangleLeg, -yTriangleLeg);
+            double wheelAngle = Math.atan2(xSpinningLeg, -ySpinningLeg);
 
             wheel.setWheelAngle(-wheelAngle);
 

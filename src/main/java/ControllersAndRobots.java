@@ -48,5 +48,6 @@ public class ControllersAndRobots {
         controllers.put("Better Arcade Drive", new BetterArcadeDrive());
         controllers.put("Translational Swerve", new TranslationalSwerve());
         controllers.put("Spinning in Place", new SpinningInPlace());
+        controllers.put("Both Swerves Together", new BothSwervesTogether());
     }
 }
