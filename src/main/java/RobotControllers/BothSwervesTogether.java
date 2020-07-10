@@ -29,20 +29,27 @@ public class BothSwervesTogether implements RobotController {
             double velocity = Math.sqrt((xTriangleLeg * xTriangleLeg) + (yTriangleLeg * yTriangleLeg)) * 5.0; // hypotenuse length
             double spinnier = Math.sqrt((xSpinningLeg * xSpinningLeg) + (ySpinningLeg * ySpinningLeg)); //maths and such
 
-            double spinnyAngle = Math.atan2(xSpinningLeg, -ySpinningLeg);
+            double spinnyAngle;
+            if (spinnyPower != 0) {
+                spinnyAngle = Math.atan2(xSpinningLeg, -ySpinningLeg);
+            } else {
+                spinnyAngle = 0;
+            }
 
             // use the x position of the wheel (with the center of the robot being (0, 0)) to see if the wheel is on the right half of the robot or the left half
+            double spinVelocity = 0;
             if(ySpinningLeg * xSpinningLeg < 0 && ySpinningLeg != 0) {
-                wheel.setWheelVelocity(-(spinnyPower * spinnier + velocity));
+                spinVelocity = -(spinnyPower * spinnier);
             } else if(ySpinningLeg * xSpinningLeg > 0 && ySpinningLeg != 0) {
-                wheel.setWheelVelocity(spinnyPower * spinnier + velocity);
+                spinVelocity = spinnyPower * spinnier;
             } else if (ySpinningLeg == 0) {
                 wheel.setWheelAngle(0);
-                wheel.setWheelVelocity(spinnyPower * spinnier * (-wheel.getPosition().x / Math.abs(wheel.getPosition().x) + velocity)); //I was too lazy to make another if statement just to change a sign, so you get this.
+                spinVelocity = spinnyPower * spinnier * (-wheel.getPosition().x / Math.abs(wheel.getPosition().x)); //I was too lazy to make another if statement just to change a sign, so you get this.
             }
 
             double angle = -Math.atan2(xTriangleLeg, yTriangleLeg);
 
+            wheel.setWheelVelocity(spinVelocity + velocity);
             wheel.setWheelAngle(angle - spinnyAngle);
         }
     }
