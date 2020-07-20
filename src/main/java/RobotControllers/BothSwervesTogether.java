@@ -37,6 +37,7 @@ public class BothSwervesTogether implements RobotController {
             }
 
             // use the x position of the wheel (with the center of the robot being (0, 0)) to see if the wheel is on the right half of the robot or the left half
+
             double spinVelocity = 0;
             if(ySpinningLeg * xSpinningLeg < 0 && ySpinningLeg != 0) {
                 spinVelocity = -(spinnyPower * spinnier);
@@ -50,7 +51,15 @@ public class BothSwervesTogether implements RobotController {
             double angle = -Math.atan2(xTriangleLeg, yTriangleLeg);
 
             wheel.setWheelVelocity(spinVelocity + velocity);
-            wheel.setWheelAngle(angle - spinnyAngle);
+            wheel.setWheelAngle(spinnyAngle);
+
+
+            if (angle != 0 && spinnyAngle != 0) {
+                wheel.setWheelAngle(angle - spinnyAngle * (ySpinningLeg * xSpinningLeg / Math.abs(ySpinningLeg * xSpinningLeg)));
+            } else {
+                wheel.setWheelAngle(angle - spinnyAngle);
+            }
+
         }
     }
 }
